@@ -16,6 +16,9 @@ include __DIR__ . "/partials/array.php";
 </head>
 
 <body>
+    <!-- RICHIAMO L'HEADER -->
+    <?php include_once __DIR__ . "/partials/header.php"; ?>
+
     <!-- INIZIO MAIN -->
     <main class="container">
         <div class="row justify-content-center">
@@ -49,7 +52,7 @@ include __DIR__ . "/partials/array.php";
                                     <?php echo $hotel['vote']; ?>
                                 </td>
                                 <td class="text-center">
-                                    <?php echo $hotel['distance_to_center'].'km'; ?>
+                                    <?php echo $hotel['distance_to_center'] . 'km'; ?>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -58,6 +61,9 @@ include __DIR__ . "/partials/array.php";
             </div>
         </div>
     </main>
+
+    <!-- RICHIAMO IL FOOTER -->
+    <?php include_once __DIR__ . "/partials/footer.php"; ?>
 </body>
 
 </html>
