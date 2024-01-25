@@ -18,16 +18,43 @@ include __DIR__ . "/partials/array.php";
 <body>
     <!-- INIZIO MAIN -->
     <main class="container">
-        <div class="row">
-            <div class="col-12">
+        <div class="row justify-content-center">
+            <div class="col-12 pb-3">
                 <h1 class="text-center">Lista Hotel</h1>
-                <?php foreach ($hotels as $hotel) { ?>
-                    <?php echo $hotel['name'].'<br>'; ?>
-                    <?php echo $hotel['description'].'<br>'; ?>
-                    <?php echo $hotel['parking'].'<br>'; ?>
-                    <?php echo $hotel['vote'].'<br>'; ?>
-                    <?php echo $hotel['distance_to_center'].'<br>'; ?>
-                <?php } ?>
+            </div>
+            <div class="col-9 pb-5">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Nome Hotel</th>
+                            <th>Descrizione</th>
+                            <th class="text-center">Parcheggio presente?</th>
+                            <th class="text-center">Voto</th>
+                            <th class="text-center">Distanza dal centro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($hotels as $hotel) { ?>
+                            <tr>
+                                <td>
+                                    <?php echo $hotel['name']; ?>
+                                </td>
+                                <td>
+                                    <?php echo $hotel['description']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $hotel['parking'] == true ? 'Si, comodo' : 'No, cammini'; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $hotel['vote']; ?>
+                                </td>
+                                <td class="text-center">
+                                    <?php echo $hotel['distance_to_center'].'km'; ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
