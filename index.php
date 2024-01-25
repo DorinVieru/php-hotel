@@ -1,6 +1,6 @@
 <!-- SEZIONE PHP LOGICA -->
 <?php
-
+include __DIR__ . "/partials/array.php";
 ?>
 
 <!-- SEZIONE HTML -->
@@ -20,7 +20,14 @@
     <main class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center">Auto Belle</h1>
+                <h1 class="text-center">Lista Hotel</h1>
+                <?php foreach ($hotels as $hotel) { ?>
+                    <?php echo $hotel['name'].'<br>'; ?>
+                    <?php echo $hotel['description'].'<br>'; ?>
+                    <?php echo $hotel['parking'].'<br>'; ?>
+                    <?php echo $hotel['vote'].'<br>'; ?>
+                    <?php echo $hotel['distance_to_center'].'<br>'; ?>
+                <?php } ?>
             </div>
         </div>
     </main>
