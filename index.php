@@ -1,6 +1,26 @@
 <!-- SEZIONE PHP LOGICA -->
 <?php
+// RICHIAMO ARRAY
 include __DIR__ . "/partials/array.php";
+
+$filtered_hotels = $hotels; //MOSTRO TUTTI GLI HOTEL AL CARICAMENTE DELLA PAGINA
+
+// CONDIZIONE PER CICLARE IL PARCHEGGIO
+if (isset($_GET['parking']) && $_GET['parking'] != '') {
+    $temphotels = []; //ARRAY TEMPORANEO CHE CONTERRA' GLI HOTEL FILTRATI CHE POI VENGONO MOSTRATI
+    $parking = $_GET['parking'];
+
+    // CICLO L'ARRAY DI HOTEL PER IL PARCHEGGIO
+    foreach ($filtered_hotels as $hotel) {
+        if ($hotel['parking'] == $parking) {
+            $temphotels[] = $hotel;
+        }
+    }
+
+    $filtered_hotels = $temphotels;
+}
+
+
 ?>
 
 <!-- SEZIONE HTML -->
@@ -22,9 +42,32 @@ include __DIR__ . "/partials/array.php";
     <!-- INIZIO MAIN -->
     <main class="container">
         <div class="row justify-content-center">
-            <div class="col-12 pb-3">
+            <!-- TITLE -->
+            <div class="col-12">
                 <h1 class="text-center">Lista Hotel</h1>
             </div>
+            <!-- FORM SEARCH -->
+            <div class="col-10 mt-5 mb-3 ps-5 ms-5">
+                <form action="./index.php" method="GET">
+                    <div class="row ps-5 ms-5">
+                        <!-- SELECT PARCHEGGIO -->
+                        <div class="col-5">
+                            <select name="parking" id="parking" class="form-control">
+                                <option value="">Seleziona se desideri o no il parcheggio</option>
+                                <option value="1" <?php echo (isset($_GET['parking']) && $_GET['parking'] == "1") ? 'selected' : ''; ?>>Si</option>
+                                <option value="0" <?php echo (isset($_GET['parking']) && $_GET['parking'] == "0") ? 'selected' : ''; ?>>No</option>
+                            </select>
+                        </div>
+                        
+                        <!-- BOTTONE INVIA -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-success">Filtra ora</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <!-- TABLE -->
             <div class="col-9 pb-5">
                 <table class="table table-striped table-bordered">
                     <thead class="table-primary">
@@ -37,7 +80,7 @@ include __DIR__ . "/partials/array.php";
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($hotels as $hotel) { ?>
+                        <?php foreach ($filtered_hotels as $hotel) { ?>
                             <tr>
                                 <td>
                                     <?php echo $hotel['name']; ?>
