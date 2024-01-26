@@ -20,6 +20,20 @@ if (isset($_GET['parking']) && $_GET['parking'] != '') {
     $filtered_hotels = $temphotels;
 }
 
+// CONDIZIONE PER CICLARE IL VOTO
+if (isset($_GET['vote']) && $_GET['vote'] != '') {
+    $temphotels = []; //ARRAY TEMPORANEO CHE CONTERRA' GLI HOTEL FILTRATI CHE POI VENGONO MOSTRATI
+    $vote = $_GET['vote'];
+
+    // CICLO L'ARRAY DI HOTEL PER IL VOTO
+    foreach ($filtered_hotels as $hotel) {
+        if ($hotel['vote'] >= $vote) {
+            $temphotels[] = $hotel;
+        }
+    }
+
+    $filtered_hotels = $temphotels;
+}
 
 ?>
 
@@ -58,7 +72,17 @@ if (isset($_GET['parking']) && $_GET['parking'] != '') {
                                 <option value="0" <?php echo (isset($_GET['parking']) && $_GET['parking'] == "0") ? 'selected' : ''; ?>>No</option>
                             </select>
                         </div>
-                        
+                        <!-- SELECT VOTO -->
+                        <div class="col-3">
+                            <select name="vote" id="vote" class="form-control">
+                                <option value="">Seleziona il voto</option>
+                                <option value="1" <?php echo (isset($_GET['vote']) && $_GET['vote'] == "1") ? 'selected' : ''; ?>>1</option>
+                                <option value="2" <?php echo (isset($_GET['vote']) && $_GET['vote'] == "2") ? 'selected' : ''; ?>>2</option>
+                                <option value="3" <?php echo (isset($_GET['vote']) && $_GET['vote'] == "3") ? 'selected' : ''; ?>>3</option>
+                                <option value="4" <?php echo (isset($_GET['vote']) && $_GET['vote'] == "4") ? 'selected' : ''; ?>>4</option>
+                                <option value="5" <?php echo (isset($_GET['vote']) && $_GET['vote'] == "5") ? 'selected' : ''; ?>>5</option>
+                            </select>
+                        </div>
                         <!-- BOTTONE INVIA -->
                         <div class="col-4">
                             <button type="submit" class="btn btn-success">Filtra ora</button>
